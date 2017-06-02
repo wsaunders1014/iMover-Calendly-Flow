@@ -1,0 +1,98 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat-Regular', sans-serif;
+  background: #273045;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+  font-family: 'Sentinel-Book';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/Sentinel-Book.eot');
+  src: url('../fonts/Sentinel-Book.eot?#iefix') format('embedded-opentype'), url('../fonts/Sentinel-Book.woff2') format('woff2'), url('../fonts/Sentinel-Book.woff') format('woff'), url('../fonts/Sentinel-Book.ttf') format('ttf'), url('../fonts/Sentinel-Book.svg#Sentinel-Book') format('svg');
+}
+@font-face {
+  font-family: 'Montserrat-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Montserrat-Regular.eot');
+  src: url('../fonts/Montserrat-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Montserrat-Regular.woff2') format('woff2'), url('../fonts/Montserrat-Regular.woff') format('woff'), url('../fonts/Montserrat-Regular.ttf') format('ttf'), url('../fonts/Montserrat-Regular.svg#Montserrat-Regular') format('svg');
+}
+@font-face {
+  font-family: 'Montserrat-Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/Montserrat-Bold.eot');
+  src: url('../fonts/Montserrat-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/Montserrat-Bold.woff2') format('woff2'), url('../fonts/Montserrat-Bold.woff') format('woff'), url('../fonts/Montserrat-Bold.ttf') format('ttf'), url('../fonts/Montserrat-Bold.svg#Montserrat-Bold') format('svg');
+}
+.clear:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.right {
+  position: absolute;
+  right: 10px;
+}
+header,
+footer {
+  color: #fff;
+}
+header {
+  font-size: 14px;
+  height: 63px;
+}
+header > div {
+  float: left;
+  margin-top: 22px;
+}
+header #logo {
+  margin-left: 42px;
+}
+header .slash {
+  height: 40px;
+  width: 1px;
+  background: #fff;
+  opacity: 0.26;
+  transform: rotate(36deg);
+  margin: 10px 20px;
+}
+header #call-us {
+  color: #6D7380;
+  margin-top: 12px;
+}
+header #call-us a {
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 0.03px;
+  text-decoration: none;
+  font-family: 'Sentinel-Book';
+}
+#root {
+  min-height: calc(100% - 126px);
+  background: #FFFFFF;
+}
+footer {
+  font-family: 'Sentinel-Book';
+  padding-left: 20px;
+  height: 63px;
+  position: relative;
+  font-size: 15px;
+  margin-top: -18px;
+}
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 27px;
+  margin-top: 22px;
+  display: inline-block;
+}
+footer .right {
+  top: 22px;
+}
