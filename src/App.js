@@ -1,41 +1,41 @@
 import React, { Component } from 'react';
-import logo from './img/logo.svg';
+import Home from './components/Home';
+import SelectDate from './components/SelectDate';
 import './css/App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      callType:null,
+      callType:'video',
       callDate:null,
       callTime:null,
-      name:'Alex Bliotta',
+      userName:'Alex Bliotta',
       phoneNumber:'310-266-8686',
       imoverStatus:'Install Pending',
-      client:'Budget Van Lines'
+      clientName:'Budget Van Lines',
+      view:'Home'
     }
+    this.onSelectionClick = this.onSelectionClick.bind(this);
+    this.changeView = this.changeView.bind(this);
+  }
+  onSelectionClick(e){
+    this.setState({callType:e.target.id});
+  }
+  changeView(e){
+    this.setState({view:e.target.id});
   }
   render() {
-    return (
-      <div className="App">
-        <div className="client-header">
-          <div className="client-logo"><img src={logo} alt="logo" /></div>
-          <span>{this.state.client}</span>
-        </div>
-        <p className="client-intro">
-          Hey <span>{this.state.name.split(' ')[0]}</span>, let's schedule your appointment.
-        </p>
-        <div className="call-selection-box">
-          <div className="selection active">VIDEO CALL</div>
-          <div className="selection">PHONE CALL</div>
-          <div className="desc">When you schedule a Phone Call with our moving specialist he/she will go over 
-               the items you’ll be moving to provide you with an accurate quote.
-          </div>
-           <div className="next-button" id="select-call">></div>
-        </div>
-
-      </div>
-    );
+    switch(this.state.view) {
+      case 'SelectDate':
+        return(
+          <SelectDate/>
+        )
+      default:
+        return(
+          <Home callType={this.state.callType} client={this.state.clientName} name={this.state.userName} onSelectionClick={this.onSelectionClick} changeView={this.changeView} />
+        );
+    }
   }
 }
 
