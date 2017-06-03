@@ -1,23 +1,91 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
 .App {
   text-align: center;
+  color: #273045;
+  font-family: 'Sentinel-Book';
+  height: 100%;
 }
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.client-header {
+  font-size: 22px;
+  margin-top: 26px;
 }
-.App-header {
-  height: 150px;
-  padding: 20px;
-  color: white;
+.client-header .client-logo {
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  vertical-align: middle;
 }
-.App-intro {
-  font-size: large;
+.client-header .client-logo img {
+  height: 100%;
 }
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.client-header .client-logo span {
+  position: relative;
+  top: 2px;
+}
+.client-intro {
+  font-size: 26px;
+  margin-top: 162px;
+}
+.client-intro span {
+  font-weight: bold;
+}
+.next-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid;
+  color: #F57023;
+  font-weight: bold;
+  font-size: 33px;
+  line-height: 50px;
+  cursor: pointer;
+  transition: transform 0.4s;
+}
+.next-button:hover {
+  transform: scale(1.2);
+}
+.call-selection-box {
+  width: 428px;
+  margin: 34px auto 0;
+  position: relative;
+}
+.call-selection-box .selection {
+  width: 212px;
+  border-radius: 0px 5px 0px 0px;
+  border: 1px solid #D2D2D2;
+  display: inline-block;
+  position: relative;
+  margin-left: -1px;
+  height: 45px;
+  padding-top: 25px;
+  color: #CECECE;
+  font-size: 14px;
+  font-family: 'Montserrat-Bold';
+  cursor: pointer;
+}
+.call-selection-box .selection:first-child {
+  border-radius: 5px 0px 0px;
+  width: 213px;
+  margin-left: 0;
+}
+.call-selection-box .selection.active {
+  z-index: 2;
+  border-color: #F57023;
+  color: #F57023;
+}
+.call-selection-box .desc {
+  padding: 26px 30px 40px;
+  border-radius: 0px 0px 5px 5px;
+  border: 1px solid #D2D2D2;
+  border-top: none;
+  line-height: 26px;
+  box-shadow: 0px 34px 39px -27px #ccc;
+}
+.call-selection-box .next-button {
+  position: absolute;
+  left: 110%;
+  top: 38%;
 }
