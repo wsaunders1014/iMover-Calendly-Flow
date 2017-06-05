@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Fill 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Customer-LP-v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4-One" transform="translate(-454.000000, -414.000000)" fill="#F59123">
+            <g id="Page-1" transform="translate(454.000000, 414.000000)">
+                <g id="morning">
+                    <g id="Group-4">
+                        <g id="morning">
+                            <path d="M25,0 C11.1933775,0 0,11.1933775 0,25 C0,38.8092715 11.1933775,50 25,50 C38.8092715,50 50,38.8092715 50,25 C50,11.1933775 38.8092715,0 25,0 Z M25,44.205298 C20.268543,44.205298 15.8682119,46.7586093 12.2,44.3268808 C5.94483444,40.174894 1.82119205,33.0712517 1.82119205,24.9997285 C1.82119205,12.1997285 12.2,1.82092053 25,1.82092053 C37.8,1.82092053 48.1788079,12.1997285 48.1788079,24.9997285 C48.1788079,33.0732384 44.052649,40.1825099 37.789404,44.3315166 C34.1237086,46.7606556 29.7284768,44.204755 25,44.204755 L25,44.205298 Z" id="Fill-1"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

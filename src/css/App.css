@@ -25,11 +25,11 @@ img {
   position: relative;
   top: 2px;
 }
-.client-intro {
+h2 {
   font-size: 26px;
-  margin-top: 162px;
+  font-weight: 400;
 }
-.client-intro span {
+h2 span {
   font-weight: bold;
 }
 .next-button {
@@ -47,12 +47,15 @@ img {
 .next-button:hover {
   transform: scale(1.2);
 }
-#call-selection-box {
+#homeView h2 {
+  margin-top: 162px;
+}
+#homeView #call-selection-box {
   width: 428px;
   margin: 34px auto 0;
   position: relative;
 }
-#call-selection-box .selection {
+#homeView #call-selection-box .selection {
   width: 212px;
   border-radius: 0px 5px 0px 0px;
   border: 1px solid #D2D2D2;
@@ -66,17 +69,17 @@ img {
   font-family: 'Montserrat-Bold';
   cursor: pointer;
 }
-#call-selection-box .selection:first-child {
+#homeView #call-selection-box .selection:first-child {
   border-radius: 5px 0px 0px;
   width: 213px;
   margin-left: 0;
 }
-#call-selection-box .selection.active {
+#homeView #call-selection-box .selection.active {
   z-index: 2;
   border-color: #F57023;
   color: #F57023;
 }
-#call-selection-box .desc {
+#homeView #call-selection-box .desc {
   padding: 26px 30px 40px;
   border-radius: 0px 0px 5px 5px;
   border: 1px solid #D2D2D2;
@@ -84,8 +87,166 @@ img {
   line-height: 26px;
   box-shadow: 0px 34px 39px -27px #ccc;
 }
-#call-selection-box .next-button {
+#homeView #call-selection-box .next-button {
   position: absolute;
   left: 110%;
   top: 38%;
+}
+#info-bar {
+  text-transform: capitalize;
+  text-align: center;
+  border: 2px solid #E1E1E1;
+  padding: 7px 18px;
+  display: inline-block;
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #D4D4D4;
+  letter-spacing: 1.3px;
+  margin-top: 95px;
+}
+#selectdateView {
+  overflow-x: hidden;
+}
+#selectdateView h2 {
+  margin-top: 34px;
+}
+#selectdateView .next-button {
+  display: inline-block;
+  position: relative;
+  top: -74px;
+  left: 13px;
+}
+#selectdateView .date-selector {
+  margin: 46px 0 0;
+  width: 863px;
+  position: relative;
+  overflow-x: hidden;
+  height: 143px;
+  display: inline-block;
+}
+#selectdateView .date-selector .overflow {
+  width: 1738px;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  transition: left 1s;
+}
+#selectdateView .date-selector .overflow.left {
+  left: 0;
+}
+#selectdateView .date-selector .overflow.right {
+  left: -875px;
+}
+#selectdateView .date-selector .today {
+  position: absolute;
+  top: -24px;
+  z-index: 3;
+  left: 34px;
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #4C4C4C;
+  letter-spacing: 1.3px;
+  line-height: 24px;
+}
+#selectdateView .date-selector .date-box {
+  border: 1px solid #E7E7E7;
+  border-radius: 5px;
+  display: inline-block;
+  width: 111px;
+  height: 76px;
+  cursor: pointer;
+  margin-right: 12px;
+}
+#selectdateView .date-selector .date-box:hover {
+  border: 1px solid #F57023;
+}
+#selectdateView .date-selector .date-box:hover .day-name {
+  color: #F57023;
+}
+#selectdateView .date-selector .date-box:last-child {
+  margin-right: 0;
+}
+#selectdateView .date-selector .date-box .day-name {
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #C1C1C1;
+  letter-spacing: 0.6px;
+  line-height: 36px;
+}
+#selectdateView .date-selector .date-box .date {
+  font-size: 18px;
+  color: #5E5C5C;
+  letter-spacing: 0.19px;
+  font-family: 'Montserrat-Regular';
+  line-height: 13px;
+}
+#selectdateView .date-selector .date-box.active {
+  background: #F57023;
+}
+#selectdateView .date-selector .date-box.active .day-name,
+#selectdateView .date-selector .date-box.active .date {
+  color: #fff !important;
+}
+#selectdateView .date-selector #cycleDates {
+  font-family: Montserrat-Regular;
+  font-size: 12px;
+  color: #393939;
+  letter-spacing: 0.6px;
+  line-height: 24px;
+  text-align: right;
+  margin-top: 118px;
+  cursor: pointer;
+}
+#selectdateView .date-selector #cycleDates:hover {
+  color: #F57023;
+}
+#selecttimeView .times-holder {
+  margin-top: 39px;
+}
+#selecttimeView .times-holder .next-button {
+  display: inline-block;
+  position: relative;
+  top: -102px;
+  left: 20px;
+}
+#selecttimeView .times-holder .times {
+  display: inline-block;
+  width: 420px;
+}
+#selecttimeView .times-holder .times .row {
+  margin-top: 13px;
+}
+#selecttimeView .times-holder .times .row > div {
+  display: inline-block;
+  width: 198px;
+  border: 1px solid #D8D8D8;
+  border-radius: 5px;
+  padding: 19px 0;
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  color: #9B9B9B;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+}
+#selecttimeView .times-holder .times .row > div:first-child {
+  margin-right: 20px;
+}
+#selecttimeView .times-holder #am {
+  margin-right: 60px;
+}
+#selecttimeView .times-holder #am .time-slot:hover {
+  border: 1px solid;
+  color: #F68600;
+}
+#selecttimeView .times-holder #am .time-slot.selected {
+  background: #F68600;
+  color: #F68600;
+}
+#selecttimeView .times-holder #pm .time-slot:hover {
+  color: #49B1D3;
+  border: 1px solid;
+}
+#selecttimeView .times-holder #pm .time-slot.selected {
+  background: #49B1D3;
+  color: #fff;
 }

@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import logo from '../img/logo.svg';
+
+import DaySelector from './DaySelector.js';
 class SelectDate extends Component {
-	constructor(props) {
-		super(props);
-		console.log(props);
-	}
 	render() {
 	    return (
-	      <div className="App">
-	        <div className="client-header">
-	          <div className="client-logo"><img src={logo} alt="logo" /></div>
-	          <span>{this.props.client}</span>
-	        </div>
-	      </div>
+	    	<div id="selectdateView">
+	    		<h2>Select the day that works for you.</h2>
+	    		<div>
+		    		<DaySelector chooseDate={this.props.chooseDate} callDate={this.props.callDate}/>
+		    		<div className="next-button" id="SelectTime" onClick={this.props.changeView}>></div>
+		    	</div>
+	    	</div>
 	    );
-	  }	
+	}	
 }
 export default SelectDate;
