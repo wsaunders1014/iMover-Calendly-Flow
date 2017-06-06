@@ -6,8 +6,10 @@ class SelectTime extends Component {
 	render() {
 		var amTimes = [];
 		for(var i =8;i <12;i++){
+			var one = i+'AM - '+i+':30AM';
+			var two = i+':30AM - '+(i+1)+'AM';
 			amTimes.push(
-				<div key={i} className="row"><div className='time-slot'>{i}AM - {i}:30AM</div><div className='time-slot'>{i}:30AM - {i+1}AM</div></div>
+				<div key={i} className="row"><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===one) ? ' selected':'')}>{one}</div><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===two) ? ' selected':'')}>{two}</div></div>
 			)
 		}
 		var pmTimes = [];
@@ -17,14 +19,16 @@ class SelectTime extends Component {
 				x = z-12;
 			else
 				x=z;
+			one = x+'PM - '+x+':30PM';
+			two = x+':30PM - '+(x+1)+'PM';
 			pmTimes.push(
-				<div key={x} className="row"><div className='time-slot'>{x}PM - {x}:30PM</div><div className='time-slot'>{x}:30PM - {x+1}PM</div></div>
+				<div key={x} className="row"><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===one) ? ' selected':'')}>{one}</div><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===two) ? ' selected':'')}>{two}</div></div>
 			)
 		}
 	    return (
 	    	<div id="selecttimeView">
 	    		<h2>What time works for you?</h2>
-	    		<TimeZone />
+	    		<TimeZone setTimeZone={this.props.setTimeZone} />
 	    		<div className="times-holder">
 		    		<div id="am" className="times">
 		    			<div className="time-logo"><img src={morning} alt="AM" /></div>
