@@ -45,9 +45,11 @@ class TimeZone extends Component {
 
 		if(!this.toggle){
 			this.toggle=true;
+			document.getElementById('time-zone').children[2].style.height = '180px';
 			document.getElementById('time-zone').children[2].children[0].style.top ='0px';
 		}else{
 			this.toggle=false;
+			document.getElementById('time-zone').children[2].style.height = '0px';
 			document.getElementById('time-zone').children[2].children[0].style.top ='-180px';
 		}
 	}

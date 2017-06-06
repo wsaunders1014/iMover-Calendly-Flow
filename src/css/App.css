@@ -34,6 +34,40 @@ h2 {
 h2 span {
   font-weight: bold;
 }
+.back-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+.back-btn:hover {
+  border: 2px solid #76C4DE;
+}
+#error-message {
+  color: #ff0000;
+  border: 1px solid;
+  padding: 10px 30px;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 148px;
+  display: none;
+}
+.thanks-msg {
+  font-family: Montserrat-Bold;
+  font-size: 16px;
+  color: #4ACE74;
+  letter-spacing: 1.19px;
+  margin-top: 84px;
+}
+.thanks-msg .checkmark {
+  position: relative;
+  top: 7px;
+}
 .next-button {
   width: 50px;
   height: 50px;
@@ -48,6 +82,18 @@ h2 span {
 }
 .next-button:hover {
   transform: scale(1.2);
+}
+#info-bar {
+  text-transform: capitalize;
+  text-align: center;
+  border: 2px solid #E1E1E1;
+  padding: 7px 18px;
+  display: inline-block;
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #D4D4D4;
+  letter-spacing: 1.3px;
+  margin-top: 95px;
 }
 #homeView h2 {
   margin-top: 162px;
@@ -94,18 +140,6 @@ h2 span {
   left: 110%;
   top: 38%;
 }
-#info-bar {
-  text-transform: capitalize;
-  text-align: center;
-  border: 2px solid #E1E1E1;
-  padding: 7px 18px;
-  display: inline-block;
-  font-family: Montserrat-Bold;
-  font-size: 12px;
-  color: #D4D4D4;
-  letter-spacing: 1.3px;
-  margin-top: 95px;
-}
 #selectdateView {
   overflow-x: hidden;
 }
@@ -120,14 +154,14 @@ h2 span {
 }
 #selectdateView .date-selector {
   margin: 46px 0 0;
-  width: 863px;
+  width: 881px;
   position: relative;
   overflow-x: hidden;
   height: 143px;
   display: inline-block;
 }
 #selectdateView .date-selector .overflow {
-  width: 1738px;
+  width: 1750px;
   position: absolute;
   top: 20px;
   left: 0;
@@ -143,24 +177,31 @@ h2 span {
   position: absolute;
   top: -24px;
   z-index: 3;
-  left: 34px;
+  left: 0px;
   font-family: Montserrat-Bold;
   font-size: 12px;
   color: #4C4C4C;
   letter-spacing: 1.3px;
   line-height: 24px;
+  width: 100%;
 }
 #selectdateView .date-selector .date-box {
   border: 1px solid #E7E7E7;
   border-radius: 5px;
-  display: inline-block;
+  float: left;
   width: 111px;
   height: 76px;
   cursor: pointer;
+  position: relative;
   margin-right: 12px;
+  transition: transform 0.3s;
+}
+#selectdateView .date-selector .date-box:first-child {
+  margin-left: 12px;
 }
 #selectdateView .date-selector .date-box:hover {
   border: 1px solid #F57023;
+  transform: scale(1.1);
 }
 #selectdateView .date-selector .date-box:hover .day-name {
   color: #F57023;
@@ -202,14 +243,18 @@ h2 span {
 #selectdateView .date-selector #cycleDates:hover {
   color: #F57023;
 }
+#selecttimeView h2 {
+  margin-top: 34px;
+}
 #selecttimeView #time-zone {
+  margin-top: 19px;
   background-image: linear-gradient(-180deg, rgba(242, 242, 242, 0.56) 0%, rgba(236, 235, 235, 0.72) 100%);
   border: 1px solid #C3C3C3;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), inset 0 2px 0 0 #FFFFFF;
   border-radius: 3px;
   display: inline-block;
   height: 50px;
-  width: 200px;
+  width: 220px;
   line-height: 50px;
   position: relative;
   text-align: left;
@@ -232,7 +277,7 @@ h2 span {
   left: 0px;
   position: absolute;
   width: 100%;
-  height: 300px;
+  height: 180px;
   overflow: hidden;
 }
 #selecttimeView #time-zone .dropdown .overflow {
@@ -301,4 +346,81 @@ h2 span {
 #selecttimeView .times-holder #pm .time-slot.selected {
   background: #49B1D3;
   color: #fff;
+}
+.contactView h2 {
+  margin-top: 34px;
+}
+.contactView .next-button {
+  position: absolute;
+  left: 107%;
+  top: 40%;
+}
+.contactView .contact-form {
+  width: 463px;
+  display: inline-block;
+  position: relative;
+  margin-top: 19px;
+}
+.contactView .contact-form form input,
+.contactView .contact-form form textarea {
+  background: #F9F7F7;
+  border: 0 solid #E5E5E5;
+  box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.54);
+  border-radius: 3px;
+  font-family: Sentinel-Book;
+  font-size: 20px;
+  color: #000000;
+  letter-spacing: -0.26px;
+}
+.contactView .contact-form form input {
+  width: 220px;
+  height: 47px;
+  text-align: center;
+}
+.contactView .contact-form form input:first-child {
+  margin-right: 19px;
+}
+.contactView .contact-form form textarea {
+  display: block;
+  width: 423px;
+  height: 147px;
+  padding: 20px;
+  margin-top: 15px;
+}
+.thanksView h2 {
+  margin-top: 32px;
+}
+.thanksView .thanks-box {
+  background: #8EC2CE;
+  border-radius: 5px;
+  width: 625px;
+  margin: 0 auto;
+  padding: 17px 0 50px 94px;
+}
+.thanksView .thanks-box .square {
+  float: left;
+  width: 30%;
+  text-align: left;
+  margin-top: 28px;
+}
+.thanksView .thanks-box .square .title {
+  font-family: Montserrat-Bold;
+  font-size: 12px;
+  color: #B5E7F3;
+  letter-spacing: 1.3px;
+}
+.thanksView .thanks-box .square .desc {
+  font-size: 22px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-transform: capitalize;
+  margin-top: 14px;
+}
+.thanksView .footer {
+  width: 390px;
+  margin: 20px auto 0;
+}
+.thanksView .footer a {
+  color: #49B1D3;
+  text-decoration: none;
 }
