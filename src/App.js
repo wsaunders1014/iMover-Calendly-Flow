@@ -101,6 +101,21 @@ class App extends Component {
   }
   componentDidMount() {
     this.errorDiv = document.getElementById('error-message');
+
+    //incoming URL has user Token. Check Disha's API for user info and schedule status
+    /*
+      fetch('disha/api'),then(function(response){
+        if(scheduled){
+          fetch(user api).then((response)=>{
+            
+          })
+        }
+        this.setState({
+          userName:
+          phoneNumber:
+        });
+      })
+    */
   }
   viewSwitch(){
     switch(this.state.view) {
