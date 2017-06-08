@@ -13,17 +13,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      callType:'video',
+      callType:1,
       callDate:null,
       callTime:null,
       callTimeZone:null,
-      userName:'Alex Bliotta',
-      phoneNumber:'310-266-8686',
+      userName:'',
+      phoneNumber:'',
       userNote:'',
       imoverStatus:'Install Pending',
       clientName:'Budget Van Lines',
       view:'Home',
-      error:''
+      error:'',
+      token:null,
+      sessionID:null
     }
    
     this.onSelectionClick = this.onSelectionClick.bind(this);
@@ -36,15 +38,16 @@ class App extends Component {
     this.goBack = this.goBack.bind(this);
   }
   onSelectionClick(e){
-    this.setState({callType:e.target.id});
+    this.setState({callType:(e.target.id==='video') ? 1:2});
   }
   chooseDate(e){
     this.errorDiv.style.display = 'none';
-    this.setState({callDate:e.currentTarget.children[1].innerHTML})
+    this.setState({callDate:e.currentTarget.children[1].innerHTML});
+    this.changeView('SelectTime')
   }
   chooseTime(e){
     this.errorDiv.style.display = 'none';
-    this.setState({callTime:e.currentTarget.innerHTML})
+    this.setState({callTime:e.currentTarget.getAttribute('data-time')})
   }
   setTimeZone(tz){
     this.errorDiv.style.display = 'none';
@@ -67,23 +70,30 @@ class App extends Component {
     var history=['Home','SelectDate','SelectTime','ContactInfo'];
     this.setState({view:history[history.indexOf(this.state.view)-1]})
   }
-  changeView(e){
-    if(e.target.id ==='SelectTime'){
-      if(this.state.callDate) {
-        this.setState({view:e.target.id});
-      }else{
-        this.setState({error:'Please select a date.'});
-        this.errorDiv.style.display='block';
-      }
-    }else if(e.target.id==='ContactInfo') {
+  changeView(view){
+    if(view ==='SelectTime'){
+      this.setState({view:view});
+    }else if(view==='ContactInfo') {
       if(this.state.callTime && this.state.callTimeZone)
-        this.setState({view:e.target.id});
+        this.setState({view:view});
       else{
         this.setState({error:'Please select a time and a timezone.'});
         this.errorDiv.style.display='block';
       }
-    }else
-      this.setState({view:e.target.id});
+    }else if(view==='SelectDate'){
+      //update_database
+      this.setState({view:view});
+    }
+     fetch('/api',{
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method:'POST',
+      body:JSON.stringify(this.state)
+    }).then(function(res){
+        console.log(res)
+    });
   }
   render() {
     return(
@@ -103,26 +113,39 @@ class App extends Component {
     this.errorDiv = document.getElementById('error-message');
 
     //incoming URL has user Token. Check Disha's API for user info and schedule status
-    /*
-      fetch('disha/api'),then(function(response){
-        if(scheduled){
-          fetch(user api).then((response)=>{
-            
-          })
+    //fake api to test.
+    var that = this;
+      fetch('/getuser').then(function(res){
+        return res.json();
+
+      }).then(function(d){
+        if(d.scheduled){
+         // var data = d;
+          //grab user's appt info from /api with Fetch
+          that.setState({
+            userName:d.fullname,
+            phoneNumber:d.phone,
+            sessionID:d.sessionID,
+            token:d.token,
+            view: 'ThankYou'
+          });
+        }else{
+          that.setState({
+            userName:d.fullname,
+            phoneNumber:d.phone,
+            sessionID:d.sessionID,
+            token:d.token
+          });
         }
-        this.setState({
-          userName:
-          phoneNumber:
-        });
       })
-    */
+    
   }
   viewSwitch(){
     switch(this.state.view) {
       case 'SelectDate':
         return (<SelectDate callType={this.state.callType} callDate={this.state.callDate} callTime={this.state.callTime} chooseDate={this.chooseDate} changeView={this.changeView}/>)
       case 'SelectTime':
-        return(<SelectTime setTimeZone={this.setTimeZone} callTime={this.state.callTime} chooseTime={this.chooseTime} changeView={this.changeView} />);
+        return(<SelectTime setTimeZone={this.setTimeZone} callTime={this.state.callTime} callTimeZone={this.state.callTimeZone} chooseTime={this.chooseTime} changeView={this.changeView} />);
       case 'ContactInfo':
         return(<ContactInfo updateForm={this.updateForm} userName={this.state.userName} phoneNumber={this.state.phoneNumber} changeView={this.changeView} />)
       case 'ThankYou':

@@ -61,6 +61,7 @@ header > div {
 }
 header #logo {
   margin-left: 42px;
+  margin-top: 14px;
 }
 header .slash {
   height: 40px;

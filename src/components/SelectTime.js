@@ -3,13 +3,22 @@ import TimeZone from './TimeZone';
 import morning from '../img/morning.svg';
 import afternoon from '../img/afternoon.svg';
 class SelectTime extends Component {
+	constructor(props) {
+		super(props);
+		this.onClickHandler = this.onClickHandler.bind(this);
+	}
+	onClickHandler(){
+		this.props.changeView('ContactInfo')
+	}
 	render() {
 		var amTimes = [];
 		for(var i =8;i <12;i++){
-			var one = i+'AM - '+i+':30AM';
-			var two = i+':30AM - '+(i+1)+'AM';
+			var a = i+'AM';
+			var b = i+':30AM';
+			var one = a+' - '+i+':30AM';
+			var two = b+' - '+(i+1)+'AM';
 			amTimes.push(
-				<div key={i} className="row"><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===one) ? ' selected':'')}>{one}</div><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===two) ? ' selected':'')}>{two}</div></div>
+				<div key={i} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===b) ? ' selected':'')}>{two}</div></div>
 			)
 		}
 		var pmTimes = [];
@@ -19,16 +28,18 @@ class SelectTime extends Component {
 				x = z-12;
 			else
 				x=z;
-			one = x+'PM - '+x+':30PM';
-			two = x+':30PM - '+(x+1)+'PM';
+			a = x+'PM';
+			b = x+':30PM';
+			one = a+' - '+x+':30PM';
+			two = b+' - '+(x+1)+'PM';
 			pmTimes.push(
-				<div key={x} className="row"><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===one) ? ' selected':'')}>{one}</div><div onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===two) ? ' selected':'')}>{two}</div></div>
+				<div key={x} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===b) ? ' selected':'')}>{two}</div></div>
 			)
 		}
 	    return (
 	    	<div id="selecttimeView">
 	    		<h2>What time works for you?</h2>
-	    		<TimeZone setTimeZone={this.props.setTimeZone} />
+	    		<TimeZone setTimeZone={this.props.setTimeZone} callTimeZone={this.props.callTimeZone} />
 	    		<div className="times-holder">
 		    		<div id="am" className="times">
 		    			<div className="time-logo"><img src={morning} alt="AM" /></div>
@@ -38,7 +49,7 @@ class SelectTime extends Component {
 		    			<div className="time-logo"><img src={afternoon} alt="PM" /></div>
 		    			{pmTimes}
 		    		</div>
-		    		<div className="next-button" id="ContactInfo" onClick={this.props.changeView}>></div>
+		    		<div className="next-button" id="ContactInfo" onClick={this.onClickHandler}>></div>
 		    	</div>
 	    	</div>
 	    );

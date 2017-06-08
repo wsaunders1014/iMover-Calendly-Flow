@@ -11,7 +11,7 @@ class InfoBar extends Component {
 		}else{
 			return (
 				<div id="info-bar">
-					{this.props.callType +' Call'}
+					{(this.props.callType===1) ? 'Video Call':'Phone Call'}
 					{(this.props.callDate) ? ' / '+this.props.callDate:''}
 					{(this.props.callTime) ? ' / '+this.props.callTime:''}
 				</div>

@@ -8,7 +8,8 @@ class SelectDate extends Component {
 
 	    		<div>
 		    		<DaySelector {...this.props} />
-		    		<div className="next-button" id="SelectTime" onClick={this.props.changeView}>></div>
+		    		{// <div className="next-button" id="SelectTime" onClick={this.props.changeView}>></div>
+		    		}
 		    	</div>
 	    	</div>
 	    );
