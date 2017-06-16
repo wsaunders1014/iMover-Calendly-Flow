@@ -21,10 +21,10 @@ class DaySelector extends Component {
 		  			 var dateArray = [this.monthsArray[date.getMonth()], date.getDate(), date.getFullYear()];
 		  			return(
 
-			  			<div className={"date-box "+((this.props.callDate===dateArray[0]+' '+dateArray[1]) ? 'active':'')} key={date.getDate()} onClick={this.props.chooseDate}>
-			  				{(y===0) && <span className="today">TODAY</span>}
+			  			<div className={"date-box "+((this.props.schedule_date===dateArray[0]+' '+dateArray[1]) ? 'active':'')} key={date.getDate()} onClick={this.props.chooseDate}>
 							<div className="day-name">{this.daysArray[date.getDay()]}</div>
 							<div className="date">{dateArray[0]+' '+dateArray[1]}</div>
+							{(y===0) && <span className="today">TODAY</span>}
 						</div>
 					);
 		  		})}

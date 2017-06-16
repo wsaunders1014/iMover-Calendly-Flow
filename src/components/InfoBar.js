@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import checkmark from '../img/check_mark.svg';
 class InfoBar extends Component {
 	render(){
-		if(this.props.view ==='Home'){
+		if(this.props.view ==='Home' || this.props.view == null){
 			return(null);
 		}else if(this.props.view ==='ThankYou'){
 			return (
@@ -11,9 +11,9 @@ class InfoBar extends Component {
 		}else{
 			return (
 				<div id="info-bar">
-					{(this.props.callType===1) ? 'Video Call':'Phone Call'}
-					{(this.props.callDate) ? ' / '+this.props.callDate:''}
-					{(this.props.callTime) ? ' / '+this.props.callTime:''}
+					{(this.props.type===1) ? 'Video Call':'Phone Call'}
+					{(this.props.schedule_date) ? ' / '+this.props.schedule_date:''}
+					{(this.props.timeslot) ? ' / '+this.props.timeslot:''}
 				</div>
 			)
 		}

@@ -18,7 +18,7 @@ class SelectTime extends Component {
 			var one = a+' - '+i+':30AM';
 			var two = b+' - '+(i+1)+'AM';
 			amTimes.push(
-				<div key={i} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===b) ? ' selected':'')}>{two}</div></div>
+				<div key={i} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===b) ? ' selected':'')}>{two}</div></div>
 			)
 		}
 		var pmTimes = [];
@@ -33,13 +33,13 @@ class SelectTime extends Component {
 			one = a+' - '+x+':30PM';
 			two = b+' - '+(x+1)+'PM';
 			pmTimes.push(
-				<div key={x} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.callTime===b) ? ' selected':'')}>{two}</div></div>
+				<div key={x} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===b) ? ' selected':'')}>{two}</div></div>
 			)
 		}
 	    return (
-	    	<div id="selecttimeView">
+	    	<div id="selecttimeView" className="view">
 	    		<h2>What time works for you?</h2>
-	    		<TimeZone setTimeZone={this.props.setTimeZone} callTimeZone={this.props.callTimeZone} />
+	    		<TimeZone setTimeZone={this.props.setTimeZone} timezone={this.props.timezone} />
 	    		<div className="times-holder">
 		    		<div id="am" className="times">
 		    			<div className="time-logo"><img src={morning} alt="AM" /></div>
@@ -49,7 +49,6 @@ class SelectTime extends Component {
 		    			<div className="time-logo"><img src={afternoon} alt="PM" /></div>
 		    			{pmTimes}
 		    		</div>
-		    		<div className="next-button" id="ContactInfo" onClick={this.onClickHandler}>></div>
 		    	</div>
 	    	</div>
 	    );

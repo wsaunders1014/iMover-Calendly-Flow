@@ -3,7 +3,7 @@ import ContactForm from './ContactForm';
 class ContactInfo extends Component {
 	render() {
 		return(
-			<div className="contactView">
+			<div id="contactView" className="view">
 				<h2>Where can we reach you?</h2>
 				<ContactForm {...this.props} />		
 			</div>

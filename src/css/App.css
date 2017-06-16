@@ -7,10 +7,12 @@ img {
   color: #273045;
   font-family: 'Sentinel-Book';
   height: 100%;
+  width: 100%;
 }
 .client-header {
   font-size: 22px;
   margin-top: 26px;
+  width: 100%;
   font-family: 'Colfax';
 }
 .client-header .client-logo {
@@ -33,6 +35,13 @@ h2 {
 }
 h2 span {
   font-weight: bold;
+}
+#loader {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  width: 100%;
+  font-size: 22px;
 }
 .back-btn {
   position: absolute;
@@ -95,6 +104,13 @@ h2 span {
   letter-spacing: 1.3px;
   margin-top: 95px;
 }
+.view {
+  width: 100%;
+  transition: margin-left 0.4s;
+}
+#homeView {
+  margin-left: 0;
+}
 #homeView h2 {
   margin-top: 162px;
 }
@@ -116,13 +132,23 @@ h2 span {
   font-size: 14px;
   font-family: 'Montserrat-Bold';
   cursor: pointer;
+  transition: transform 0.3s;
+  transform-origin: bottom left;
 }
 #homeView #call-selection-box .selection:first-child {
   border-radius: 5px 0px 0px;
   width: 213px;
   margin-left: 0;
+  transform-origin: bottom right;
 }
 #homeView #call-selection-box .selection.active {
+  z-index: 2;
+  border-color: #F57023;
+  background: #F57023;
+  color: #FFF !important;
+}
+#homeView #call-selection-box .selection:hover {
+  transform: scale(1.03);
   z-index: 2;
   border-color: #F57023;
   color: #F57023;
@@ -239,6 +265,7 @@ h2 span {
   text-align: right;
   margin-top: 118px;
   cursor: pointer;
+  float: right;
 }
 #selectdateView .date-selector #cycleDates:hover {
   color: #F57023;
@@ -288,7 +315,7 @@ h2 span {
 #selecttimeView #time-zone .dropdown .overflow > div {
   height: 35px;
   line-height: 35px;
-  background-image: linear-gradient(-180deg, rgba(242, 242, 242, 0.56) 0%, rgba(236, 235, 235, 0.72) 100%);
+  background-image: linear-gradient(-180deg, #f2f2f2 0%, #ecebeb 100%);
   border: 1px solid #C3C3C3;
   margin-top: -1px;
   padding-left: 10px;
@@ -296,10 +323,10 @@ h2 span {
 }
 #selecttimeView #time-zone .dropdown .overflow > div:hover {
   color: #333;
+  background-image: linear-gradient(-180deg, #dedede 0%, #d6d6d6 100%);
 }
 #selecttimeView .times-holder {
-  margin-top: 39px;
-  margin-bottom: 100px;
+  margin-top: -21px;
 }
 #selecttimeView .times-holder .next-button {
   display: inline-block;
@@ -325,6 +352,7 @@ h2 span {
   color: #9B9B9B;
   letter-spacing: 1.2px;
   cursor: pointer;
+  transition: transform 0.3s;
 }
 #selecttimeView .times-holder .times .row > div:first-child {
   margin-right: 20px;
@@ -335,6 +363,7 @@ h2 span {
 #selecttimeView .times-holder #am .time-slot:hover {
   border: 1px solid;
   color: #F68600;
+  transform: scale(1.1);
 }
 #selecttimeView .times-holder #am .time-slot.selected {
   background: #F68600;
@@ -343,27 +372,28 @@ h2 span {
 #selecttimeView .times-holder #pm .time-slot:hover {
   color: #49B1D3;
   border: 1px solid;
+  transform: scale(1.1);
 }
 #selecttimeView .times-holder #pm .time-slot.selected {
   background: #49B1D3;
   color: #fff;
 }
-.contactView h2 {
+#contactView h2 {
   margin-top: 34px;
 }
-.contactView .next-button {
+#contactView .next-button {
   position: absolute;
   left: 107%;
   top: 40%;
 }
-.contactView .contact-form {
+#contactView .contact-form {
   width: 463px;
   display: inline-block;
   position: relative;
   margin-top: 19px;
 }
-.contactView .contact-form form input,
-.contactView .contact-form form textarea {
+#contactView .contact-form form input,
+#contactView .contact-form form textarea {
   background: #F9F7F7;
   border: 0 solid #E5E5E5;
   box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.54);
@@ -373,15 +403,15 @@ h2 span {
   color: #000000;
   letter-spacing: -0.26px;
 }
-.contactView .contact-form form input {
+#contactView .contact-form form input {
   width: 220px;
   height: 47px;
   text-align: center;
 }
-.contactView .contact-form form input:first-child {
+#contactView .contact-form form input:first-child {
   margin-right: 19px;
 }
-.contactView .contact-form form textarea {
+#contactView .contact-form form textarea {
   display: block;
   width: 423px;
   height: 147px;
@@ -389,40 +419,82 @@ h2 span {
   margin-top: 15px;
   resize: none;
 }
-.thanksView h2 {
+#contactView .contact-form .submit-btn {
+  width: 180px;
+  margin: 20px auto 0;
+  border: 2px solid #F57023;
+  background: #F57023;
+  color: #fff;
+  padding: 10px 0px;
+  font-family: 'Montserrat-Regular';
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+#contactView .contact-form .submit-btn:hover {
+  background: #ff833b;
+  transform: scale(1.05);
+}
+#thanksView h2 {
   margin-top: 32px;
 }
-.thanksView .thanks-box {
+#thanksView .thanks-box {
   background: #8EC2CE;
   border-radius: 5px;
   width: 625px;
-  margin: 0 auto;
+  margin: 14px auto 0;
   padding: 17px 0 50px 94px;
 }
-.thanksView .thanks-box .square {
+#thanksView .thanks-box .square {
   float: left;
   width: 30%;
   text-align: left;
   margin-top: 28px;
 }
-.thanksView .thanks-box .square .title {
+#thanksView .thanks-box .square .title {
   font-family: Montserrat-Bold;
   font-size: 12px;
   color: #B5E7F3;
   letter-spacing: 1.3px;
 }
-.thanksView .thanks-box .square .desc {
+#thanksView .thanks-box .square .desc {
   font-size: 22px;
   color: #FFFFFF;
   letter-spacing: 0;
   text-transform: capitalize;
   margin-top: 14px;
 }
-.thanksView .footer {
-  width: 390px;
+#thanksView .footer {
+  width: 400px;
   margin: 20px auto 0;
 }
-.thanksView .footer a {
+#thanksView .footer a {
   color: #49B1D3;
   text-decoration: none;
+}
+#thanksView .subfooter .links {
+  color: #F57023;
+  text-decoration: none;
+  cursor: pointer;
+}
+.example-enter {
+  opacity: 0.01;
+}
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.example-leave {
+  opacity: 1;
+}
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+.example-appear {
+  opacity: 0.01;
+}
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
 }

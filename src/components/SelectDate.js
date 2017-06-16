@@ -3,7 +3,7 @@ import DaySelector from './DaySelector.js';
 class SelectDate extends Component {
 	render() {
 	    return (
-	    	<div id="selectdateView">
+	    	<div id="selectdateView" className="view">
 	    		<h2>Select the day that works for you.</h2>
 
 	    		<div>
