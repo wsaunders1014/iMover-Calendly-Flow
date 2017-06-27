@@ -4,6 +4,9 @@ class ThankYou extends Component {
 		super(props);
 		this.formatPhone = this.formatPhone.bind(this);
 	}
+	onCancel(){
+		this.props.cancelAppt();
+	}
 	render() {
 		return(
 			<div id="thanksView" className="view">
@@ -15,7 +18,7 @@ class ThankYou extends Component {
 					</div>
 					<div className="square">
 						<div className="title">CALL DATE</div>
-						<div className='desc'>{this.formatDate()}</div>
+						<div className='desc'>{this.props.userInfo.schedule_date}</div>
 					</div>
 					<div className="square">
 						<div className="title">CALL TIME</div>
@@ -34,9 +37,9 @@ class ThankYou extends Component {
 						<div className='desc'>Install Pending</div>
 					</div>
 				</div>
-				<h2 className="footer">Your Scheduled Call will take place on <span>{this.formatDate()}</span> on the <span><a href="http://imover.com">iMover App.</a></span></h2>
-				{(this.props.prevView ==='Home') ? <h3 className="subfooter">Are you busy on <span>{this.formatDate()}?</span>
-				<br/><span className="links" onClick={()=>{this.props.changeView('SelectDate')}}>Reschedule</span> or <span className="links" onClick={()=>{this.props.cancelAppt()}}>Cancel your appointment</span> now.</h3>:''}
+				<h2 className="footer">Your Scheduled Call will take place on <span>{this.props.userInfo.schedule_date}</span> on the <span><a href="http://imover.com">iMover App.</a></span></h2>
+				{(this.props.prevView ==='Home') ? <h3 className="subfooter">Are you busy on <span>{this.props.userInfo.schedule_date}?</span>
+				<br/><span className="links" onClick={()=>{this.props.changeView('SelectDate')}}>Reschedule</span> or <span className="links" onClick={()=>{this.onCancel()}}>Cancel your appointment</span> now.</h3>:''}
 			</div>
 		)
 	}
@@ -45,8 +48,10 @@ class ThankYou extends Component {
 		return String(this.props.userInfo.phone).replace(/(\d{3})(\d{3})(\d{4})/g,'$1-$2-$3');
 	}
 	formatDate(){
-		if(this.props.userInfo.scheduled_date !== null){
+		console.log(this.props.userInfo.schedule_date)
+		if(this.props.userInfo.schedule_date !== null){
 			var date = new Date(this.props.userInfo.schedule_date.split('T')[0]);
+			console.log(date)
 			var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 			var day=date.getDate();
 			
@@ -64,11 +69,11 @@ class ThankYou extends Component {
 	}
 	formatTimeZone(){
 		switch(this.props.userInfo.timezone) {
-		  case 1:
+		  case 0:
 		    return 'EST';
-		  case 2:
+		  case 1:
 		    return 'CST';
-		  case 3:
+		  case 2:
 		    return 'PST';
 		  default:
 		    break;

@@ -48,7 +48,7 @@ function updateDB(req,res){
           query += (req.body.timezone !=null) ? ', timezone='+req.body.timezone:'';
           query += (req.body.timeslot !=null) ? ", timeslot='"+req.body.timeslot+"'":'';
           query += (req.body.timeslot ===null) ? ", timeslot="+req.body.timeslot:'';
-          query += (req.body.comment) ? ", comment="+req.body.comment+"'":'';
+          query += (req.body.comment) ? ", comment='"+req.body.comment+"'":'';
           query += (req.body.fullname) ? ", fullname='"+req.body.fullname+"'":'';
           query += (req.body.phone) ? ", phone='"+parseInt(req.body.phone.match(/[0-9]/g).join(''))+"'":'';
           query += (req.body.sessionID) ? ', session_id='+req.body.sessionID:'';

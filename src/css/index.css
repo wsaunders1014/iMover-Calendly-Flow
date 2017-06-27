@@ -108,3 +108,29 @@ footer a {
 footer .right {
   top: 22px;
 }
+@media screen and (max-width: 500px) {
+  .desktop {
+    display: none;
+  }
+  header #logo {
+    margin-left: 12px;
+  }
+  footer {
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 10px 0;
+    height: 53px;
+  }
+  footer a {
+    margin: 0 3.5%;
+  }
+  footer .right {
+    top: 0;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: block;
+    right: 0;
+    margin-top: 10px;
+  }
+}

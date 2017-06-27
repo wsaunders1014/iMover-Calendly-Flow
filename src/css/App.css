@@ -64,6 +64,7 @@ h2 span {
   transform: translateX(-50%);
   left: 50%;
   top: 88px;
+  width: 250px;
   display: none;
 }
 .thanks-msg {
@@ -115,12 +116,13 @@ h2 span {
   margin-top: 162px;
 }
 #homeView #call-selection-box {
-  width: 428px;
+  width: 90%;
+  max-width: 428px;
   margin: 34px auto 0;
   position: relative;
 }
 #homeView #call-selection-box .selection {
-  width: 212px;
+  width: calc(50% - 2px);
   border-radius: 0px 5px 0px 0px;
   border: 1px solid #D2D2D2;
   display: inline-block;
@@ -137,21 +139,22 @@ h2 span {
 }
 #homeView #call-selection-box .selection:first-child {
   border-radius: 5px 0px 0px;
-  width: 213px;
+  width: calc(50% - 2px);
   margin-left: 0;
   transform-origin: bottom right;
 }
 #homeView #call-selection-box .selection.active {
   z-index: 2;
   border-color: #F57023;
-  background: #F57023;
-  color: #FFF !important;
+  background: #fff;
+  color: #F57023;
 }
 #homeView #call-selection-box .selection:hover {
   transform: scale(1.03);
   z-index: 2;
   border-color: #F57023;
-  color: #F57023;
+  color: #FFF;
+  background: #F57023;
 }
 #homeView #call-selection-box .desc {
   padding: 26px 30px 40px;
@@ -197,7 +200,13 @@ h2 span {
   left: 0;
 }
 #selectdateView .date-selector .overflow.right {
-  left: -875px;
+  left: -100%;
+}
+#selectdateView .date-selector .overflow .slide {
+  position: relative;
+  height: 100%;
+  width: 50%;
+  display: inline-block;
 }
 #selectdateView .date-selector .today {
   position: absolute;
@@ -225,13 +234,6 @@ h2 span {
 #selectdateView .date-selector .date-box:first-child {
   margin-left: 12px;
 }
-#selectdateView .date-selector .date-box:hover {
-  border: 1px solid #F57023;
-  transform: scale(1.1);
-}
-#selectdateView .date-selector .date-box:hover .day-name {
-  color: #F57023;
-}
 #selectdateView .date-selector .date-box:last-child {
   margin-right: 0;
 }
@@ -250,11 +252,20 @@ h2 span {
   line-height: 13px;
 }
 #selectdateView .date-selector .date-box.active {
-  background: #F57023;
+  border: 1px solid #F57023;
 }
 #selectdateView .date-selector .date-box.active .day-name,
 #selectdateView .date-selector .date-box.active .date {
-  color: #fff !important;
+  color: #F57023;
+}
+#selectdateView .date-selector .date-box:hover {
+  border: 1px solid #F57023;
+  transform: scale(1.1);
+  background: #F57023;
+}
+#selectdateView .date-selector .date-box:hover .day-name,
+#selectdateView .date-selector .date-box:hover .date {
+  color: #FFF;
 }
 #selectdateView .date-selector #cycleDates {
   font-family: Montserrat-Regular;
@@ -336,14 +347,15 @@ h2 span {
 }
 #selecttimeView .times-holder .times {
   display: inline-block;
-  width: 420px;
+  max-width: 420px;
+  width: 90%;
 }
 #selecttimeView .times-holder .times .row {
   margin-top: 13px;
 }
 #selecttimeView .times-holder .times .row > div {
   display: inline-block;
-  width: 198px;
+  width: calc(47.5% - 2px);
   border: 1px solid #D8D8D8;
   border-radius: 5px;
   padding: 19px 0;
@@ -355,18 +367,18 @@ h2 span {
   transition: transform 0.3s;
 }
 #selecttimeView .times-holder .times .row > div:first-child {
-  margin-right: 20px;
+  margin-right: 5%;
 }
 #selecttimeView .times-holder #am {
   margin-right: 60px;
 }
 #selecttimeView .times-holder #am .time-slot:hover {
   border: 1px solid;
-  color: #F68600;
+  color: #F57023;
   transform: scale(1.1);
 }
 #selecttimeView .times-holder #am .time-slot.selected {
-  background: #F68600;
+  background: #F57023;
   color: #fff;
 }
 #selecttimeView .times-holder #pm .time-slot:hover {
@@ -387,10 +399,12 @@ h2 span {
   top: 40%;
 }
 #contactView .contact-form {
-  width: 463px;
+  max-width: 463px;
+  width: 90%;
   display: inline-block;
   position: relative;
   margin-top: 19px;
+  padding-bottom: 30px;
 }
 #contactView .contact-form form input,
 #contactView .contact-form form textarea {
@@ -404,16 +418,17 @@ h2 span {
   letter-spacing: -0.26px;
 }
 #contactView .contact-form form input {
-  width: 220px;
+  width: calc(50% - 10px);
   height: 47px;
+  padding: 0;
   text-align: center;
 }
 #contactView .contact-form form input:first-child {
-  margin-right: 19px;
+  margin-right: 20px;
 }
 #contactView .contact-form form textarea {
   display: block;
-  width: 423px;
+  width: calc(100% - 40px);
   height: 147px;
   padding: 20px;
   margin-top: 15px;
@@ -472,29 +487,146 @@ h2 span {
   color: #49B1D3;
   text-decoration: none;
 }
-#thanksView .subfooter .links {
+#thanksView .links {
   color: #F57023;
   text-decoration: none;
   cursor: pointer;
 }
-.example-enter {
-  opacity: 0.01;
+#modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+#modal .dialog {
+  position: absolute;
+  width: 30%;
+  min-width: 300px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  background: #fff;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 20px;
+  line-height: 28px;
+  font-size: 18px;
+  z-index: 2;
 }
-.example-leave {
-  opacity: 1;
+#modal .links {
+  color: #F57023;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
 }
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-.example-appear {
-  opacity: 0.01;
-}
-.example-appear.example-appear-active {
-  opacity: 1;
-  transition: opacity 0.5s ease-in;
+@media screen and (max-width: 500px) {
+  .client-header {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+  .client-header .client-logo {
+    width: 25px;
+    height: 25px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  .back-btn:hover {
+    border: none;
+  }
+  #info-bar {
+    margin-top: 55px;
+  }
+  #homeView {
+    padding-bottom: 40px;
+  }
+  #homeView h2 {
+    width: 90%;
+    margin: 42px auto 0;
+  }
+  #homeView #call-selection-box .selection.active {
+    color: #F57023;
+    border: 1px solid #F57023;
+    background: #fff;
+  }
+  #homeView #call-selection-box .selection:hover {
+    background: #F57023;
+    color: #fff;
+  }
+  #selectdateView .right {
+    position: relative;
+    right: 0;
+  }
+  #selectdateView .date-selector {
+    width: 90%;
+    height: auto;
+    display: block;
+    margin: 46px auto 0;
+    overflow-x: visible;
+  }
+  #selectdateView .date-selector .overflow {
+    width: 200%;
+    position: relative;
+    top: 0;
+    padding: 10px 0 0px;
+    overflow-y: hidden;
+  }
+  #selectdateView .date-selector .overflow .date-box {
+    display: inline-block;
+    margin: 10px 2% 0px;
+    width: 45%;
+  }
+  #selectdateView .date-selector .overflow .date-box.active {
+    background: #fff;
+    border: 1px solid #F57023;
+  }
+  #selectdateView .date-selector .overflow .date-box.active .date,
+  #selectdateView .date-selector .overflow .date-box.active .day-name {
+    color: #F57023;
+  }
+  #selectdateView .date-selector .overflow .date-box:hover {
+    border: 1px solid #F57023;
+    background: #F57023;
+  }
+  #selectdateView .date-selector .overflow .date-box:hover .date,
+  #selectdateView .date-selector .overflow .date-box:hover .day-name {
+    color: #fff;
+  }
+  #selectdateView .date-selector #cycleDates {
+    margin: 0 0 20px;
+  }
+  #selecttimeView .times-holder {
+    margin-top: 20px;
+    padding-bottom: 30px;
+  }
+  #selecttimeView .times-holder .times {
+    margin: 0 auto;
+  }
+  #selecttimeView .times-holder #am {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+  .thanks-msg {
+    margin-top: 36px;
+  }
+  #thanksView h2 {
+    width: 90%;
+    margin: 32px auto 0;
+  }
+  #thanksView .thanks-box {
+    width: calc(90% - 40px);
+    padding: 20px;
+  }
+  #thanksView .thanks-box .square {
+    width: 50%;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+  #thanksView .footer {
+    width: 90%;
+    padding-bottom: 30px;
+  }
 }

@@ -66,6 +66,7 @@ h2{
   transform: translateX(-50%);
   left: 50%;
   top: 88px;
+  width: 250px;
   display: none;
 }
 .thanks-msg{
@@ -117,11 +118,12 @@ h2{
     margin-top: 162px;
   }
   #call-selection-box{
-    width: 428px;
+    width: 90%;
+    max-width: 428px;
     margin:34px auto 0;
     position: relative;
     .selection{
-      width: 212px;
+      width: calc(~'50% - 2px');
       border-radius: 0px 5px 0px 0px;
       border: 1px solid #D2D2D2;
       display: inline-block;
@@ -137,21 +139,22 @@ h2{
       transform-origin: bottom left;
       &:first-child{
         border-radius: 5px 0px 0px;
-        width: 213px;
+        width: calc(~'50% - 2px');
         margin-left: 0;
         transform-origin: bottom right;
       }
       &.active{
         z-index: 2;
-        border-color: #F57023;
-        background: #F57023;
-        color: #FFF !important;
+        border-color: @active;
+        background: #fff;
+        color: @active;
       }
       &:hover{
         transform: scale(1.03);
         z-index: 2;
         border-color: #F57023;
-        color: #F57023;
+        color: #FFF;
+        background: @active;
       }
     }
     .desc{
@@ -197,7 +200,13 @@ h2{
         left:0;
       }
       &.right{
-        left:-875px;
+        left:-100%;
+      }
+      .slide{
+        position: relative;
+        height: 100%;
+        width: 50%;
+        display: inline-block;
       }
     }
     .today{
@@ -225,13 +234,7 @@ h2{
       &:first-child {
         margin-left: 12px;
       }
-      &:hover{
-        border: 1px solid @active;
-        transform:scale(1.1);
-        .day-name {
-          color:@active;
-        }
-      }
+     
       &:last-child{
         margin-right: 0;
       }
@@ -250,9 +253,17 @@ h2{
         line-height: 13px;
       }
       &.active{
+        border:1px solid @active;
+        .day-name,.date {
+          color: @active;
+        }
+      }
+      &:hover{
+        border: 1px solid @active;
+        transform:scale(1.1);
         background: @active;
         .day-name,.date {
-          color: #fff !important;
+          color:#FFF;
         }
       }
     }
@@ -339,12 +350,14 @@ h2{
     }
     .times{
       display: inline-block;
-      width: 420px;
+      max-width: 420px;
+      width: 90%;
       .row{
         margin-top: 13px;
         >div{
           display: inline-block;
-          width: 198px;
+          width: calc(~'47.5% - 2px');
+
           border: 1px solid #D8D8D8;
           border-radius: 5px;
           padding:19px 0;
@@ -355,7 +368,7 @@ h2{
           cursor: pointer;
           transition:transform 0.3s;
           &:first-child{
-            margin-right: 20px;
+            margin-right: 5%;
           }
         }
       }
@@ -364,11 +377,11 @@ h2{
       margin-right: 60px;
       .time-slot:hover{
         border: 1px solid;
-        color:#F68600;
+        color:#F57023;
         transform:scale(1.1);
       }
       .time-slot.selected{
-        background: #F68600;
+        background: #F57023;
         color: #fff;
       }
     }
@@ -395,10 +408,12 @@ h2{
     top: 40%;
   }
   .contact-form{
-    width: 463px;
+    max-width: 463px;
+    width: 90%;
     display: inline-block;
     position: relative;
     margin-top: 19px;
+    padding-bottom: 30px;
     form{
       input,textarea{
         background: #F9F7F7;
@@ -411,16 +426,17 @@ h2{
         letter-spacing: -0.26px;
       }
       input{
-        width: 220px;
+        width:calc(~'50% - 10px');
         height: 47px;
+        padding:0;
         text-align: center;
         &:first-child{
-          margin-right: 19px;
+          margin-right: 20px;
         }
       }
       textarea{
         display: block;
-        width: 423px;
+        width: calc(~'100% - 40px');
         height: 147px;
         padding: 20px;
         margin-top: 15px;
@@ -483,37 +499,160 @@ h2{
       text-decoration: none;
     }
   }
+  .links{
+    color: @active;
+    text-decoration: none;
+    cursor:pointer;
+  }
   .subfooter{
-    .links{
-      color: @active;
-      text-decoration: none;
-      cursor:pointer;
-
-    }
+    
   }
 }
-.example-enter {
-  opacity: 0.01;
-}
 
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+#modal{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 2;
+  .dialog{
+    position: absolute;
+    width: 30%;
+    min-width: 300px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    background: #fff;
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 20px;
+    line-height: 28px;
+    font-size: 18px;
+    z-index: 2;
+  }
+  .links{
+    color: @active;
+    text-decoration: none;
+    cursor:pointer;
+    font-weight: bold;
+  }
 }
+@media screen and (max-width:500px){
+  .client-header {
+    font-size: 18px;
+    margin-top: 16px;
+    .client-logo{
+      width: 25px;
+      height: 25px;
+    }
+  }
+  h2 {
+    font-size: 22px;
+  }
+  .back-btn:hover{
+    border:none;
+  }
+  #info-bar{
+    margin-top: 55px;
+  }
+  #homeView {
+    padding-bottom:40px;
+    h2{
+      width: 90%;
 
-.example-leave {
-  opacity: 1;
-}
+      margin: 42px auto 0;
+    }
+    #call-selection-box{
+      .selection{
+        &.active{
+          color: #F57023;
+          border: 1px solid #F57023;
+          background: #fff;
+        }
+        &:hover{
+          background: #F57023;
+          color: #fff;
+        }
+      }
+    }
+  }
+  #selectdateView {
+    .right{
+      position: relative;
+      right: 0;
+    }
+    .date-selector {
+      width: 90%;
+      height: auto;
+      display: block;
+      margin: 46px auto 0;
+      overflow-x: visible;
+      .overflow{
+        width: 200%;
+        position: relative;
+        top: 0;
+        padding:10px 0 0px;
+        overflow-y: hidden;
+        .date-box {
+          display: inline-block;
+          margin:10px 2% 0px;
+          width: 45%;
+          &.active{
+            background: #fff;
+            border: 1px solid #F57023;
+            .date,.day-name{
+              color: #F57023;
+            }
+          }
+          &:hover{
+            border: 1px solid #F57023;
+            background: #F57023;
+            .date,.day-name{
+              color: #fff;
+            }
+          }
+        }
+      }
+      #cycleDates{
+        margin:0 0 20px;
+      }
+    }
+  }
+  #selecttimeView {
+    .times-holder{
+      margin-top: 20px;
+      padding-bottom: 30px;
+      .times{
+        margin: 0 auto;
+      }
+      #am{
+        margin-right: 0px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .thanks-msg{
+    margin-top: 36px;
+  }
+  #thanksView {
+    h2{
+      width: 90%; margin: 32px auto 0;
+    }
+    .thanks-box{
+      width: calc(~'90% - 40px');
+      padding:20px;
+      .square {
+        width: 50%;
+        margin-top: 0px;
+        margin-bottom: 20px;
+      }
+    }
+    .footer{
+      width: 90%;
+      padding-bottom: 30px;
+    }
 
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-.example-appear {
-  opacity: 0.01;
-}
-
-.example-appear.example-appear-active {
-  opacity: 1;
-  transition: opacity .5s ease-in;
+  }
 }

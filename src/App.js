@@ -24,12 +24,13 @@ if(browserTZ.indexOf('E') !== -1)
   tz = 0;
 else if(browserTZ.indexOf('C') !== -1)
   tz=1;
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type:null,
-      schedule_date:null,
+      type:1,
+      schedule_date:formatDate(new Date()),
       timeslot:null,
       timezone:tz,
       fullname:'',
@@ -40,7 +41,9 @@ class App extends Component {
       error:'',
       token:token,
       sessionID:null,
-      view:''
+      view:'',
+      modal:'none',
+      sliderPos:'left'
     }
    
     this.onSelectionClick = this.onSelectionClick.bind(this);
@@ -52,6 +55,8 @@ class App extends Component {
     this.updateForm = this.updateForm.bind(this);
     this.goBack = this.goBack.bind(this);
     this.cancelAppt = this.cancelAppt.bind(this);
+    this.cycleDates = this.cycleDates.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
   onSelectionClick(e){
     this.setState({type:(e.target.id==='video') ? 1:2});
@@ -66,6 +71,12 @@ class App extends Component {
      this.changeView('SelectTime');
     },500)
   }
+  cycleDates(){
+    if(this.state.sliderPos === 'left')
+      this.setState({sliderPos:'right'});
+    else
+      this.setState({sliderPos:'left'});
+  }
   chooseTime(e){
     this.errorDiv.style.display = 'none';
     this.setState({timeslot:e.currentTarget.getAttribute('data-time')});
@@ -76,7 +87,6 @@ class App extends Component {
   setTimeZone(tz){
     this.errorDiv.style.display = 'none';
     this.setState({timezone:parseInt(tz,10)})
-    
   }
   updateForm(e){
     var input = e.target;
@@ -102,7 +112,8 @@ class App extends Component {
     else if(name==='comment')
       this.setState({comment:e.target.value});
   }
-  handleSubmit(e){
+  closeModal(){
+    this.setState({modal:'none'})
   }
   goBack(){
     var history=['Home','SelectDate','SelectTime','ContactInfo'];
@@ -112,12 +123,7 @@ class App extends Component {
     if(view ==='SelectTime'){ // FROM DATE to TIME
         this.setState({view:view,prevView:this.state.view});
     }else if(view==='ContactInfo') { //FROM TIME to CONTACT
-      if(this.state.timeslot && this.state.timezone)
         this.setState({view:view,prevView:this.state.view});
-      else{
-        this.setState({error:'Please select a time and a timezone.'});
-        this.errorDiv.style.display='block';
-      }
     }else if(view==='SelectDate'){//FROM CALL to DATE
      this.setState({view:view,prevView:this.state.view});
     }else if(view==='ThankYou'){//FROM CONTACT to THANKS
@@ -138,7 +144,13 @@ class App extends Component {
        {this.viewSwitch()}
 
        <BackBtn view={this.state.view} goBack={this.goBack} />
+         <div id="modal" style={{display:this.state.modal}} onClick={this.closeModal}>
+          <div className="dialog" onClick={(e)=>{e.stopPropagation()}}>
+            Your appointment on the {this.state.schedule_date} has been cancelled. <br/>Would you like to <span className="links" onClick={()=>{this.closeModal()}}>reschedule?</span>
+          </div>
+        </div>
       </div>
+      
     )
   }
   componentDidMount() {
@@ -213,9 +225,7 @@ class App extends Component {
     switch(this.state.view) {
       case 'SelectDate':
         return (
-          
-            <SelectDate type={this.state.type} schedule_date={this.state.schedule_date} timeslot={this.state.timeslot} chooseDate={this.chooseDate} changeView={this.changeView}/>
-         
+            <SelectDate type={this.state.type} cycleDates={this.cycleDates} schedule_date={this.state.schedule_date} timeslot={this.state.timeslot} chooseDate={this.chooseDate} changeView={this.changeView} sliderPos={this.state.sliderPos} />
         )
       case 'SelectTime':
         return(<SelectTime setTimeZone={this.setTimeZone} timeslot={this.state.timeslot} timezone={this.state.timezone} chooseTime={this.chooseTime} changeView={this.changeView} />);
@@ -225,16 +235,14 @@ class App extends Component {
         return(<ThankYou prevView={this.state.prevView} userInfo={this.state} changeView={this.changeView} cancelAppt={this.cancelAppt}/>)
       case 'Home':
         return (
-           
               <Home key={'Home'} type={this.state.type} clientName={this.state.clientName} fullname={this.state.fullname} status={this.state.status} onSelectionClick={this.onSelectionClick} changeView={this.changeView} />
-           
           )
       default:
         return(<Loader />)
     }
   }
   cancelAppt(){
-    var state = {token:this.state.token, phone:this.state.phone, schedule_date:null,timeslot:null,timezone:2,type:null,status:3,comment:'',view:'Home'}
+    var state = {token:this.state.token, phone:this.state.phone, schedule_date:formatDate(new Date()),timeslot:null,timezone:2,type:1,status:3,comment:'',view:'Home',modal:'block'}
     this.setState(state);
     fetch('/api/updateUser', {
         headers: {
