@@ -7,10 +7,11 @@ import InfoBar from './components/InfoBar';
 import ThankYou from './components/ThankYou';
 import BackBtn from './components/BackBtn'
 import Loader from './components/Loader'
+import ErrorView from './components/ErrorView'
 import logo from './img/bvl-logo.svg';
 import './css/App.css';
 //import { CSSTransitionGroup } from 'react-transition-group';
-var path = (window.location.search !== '') ? window.location.search.split('?token=')[1]:null;
+var path = (window.location.search !== '') ? window.location.search.split('?token=')[1]:'';
 var token;
 if(path.indexOf('&')!==-1){
    token = path.split('&')[0];
@@ -19,10 +20,12 @@ if(path.indexOf('&')!==-1){
     token = path;
  }
 var browserTZ = new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1];
-var tz = 2;
+var tz = 0;
 if(browserTZ.indexOf('E') !== -1)
-  tz = 0;
+  tz = 3;
 else if(browserTZ.indexOf('C') !== -1)
+  tz=2;
+else if(browserTZ.indexOf('M') !== -1)
   tz=1;
 
 class App extends Component {
@@ -86,7 +89,7 @@ class App extends Component {
   }
   setTimeZone(tz){
     this.errorDiv.style.display = 'none';
-    this.setState({timezone:parseInt(tz,10)})
+    this.setState({timezone:tz})
   }
   updateForm(e){
     var input = e.target;
@@ -146,7 +149,7 @@ class App extends Component {
        <BackBtn view={this.state.view} goBack={this.goBack} />
          <div id="modal" style={{display:this.state.modal}} onClick={this.closeModal}>
           <div className="dialog" onClick={(e)=>{e.stopPropagation()}}>
-            Your appointment on the {this.state.schedule_date} has been cancelled. <br/>Would you like to <span className="links" onClick={()=>{this.closeModal()}}>reschedule?</span>
+            Your appointment on {this.state.schedule_date} has been cancelled. <br/>Would you like to <span className="links" onClick={()=>{this.closeModal()}}>reschedule?</span>
           </div>
         </div>
       </div>
@@ -168,7 +171,8 @@ class App extends Component {
       return res.json();
     }).then(function(d){
       if(d.message!==1){
-        console.log('Token not found')
+        console.log('Token not found');
+        that.setState({view:'ErrorView'})
       }else{
         d = d.data;
         if(d.is_scheduled === 1 || d.is_scheduled === 2){
@@ -224,9 +228,7 @@ class App extends Component {
   viewSwitch(){
     switch(this.state.view) {
       case 'SelectDate':
-        return (
-            <SelectDate type={this.state.type} cycleDates={this.cycleDates} schedule_date={this.state.schedule_date} timeslot={this.state.timeslot} chooseDate={this.chooseDate} changeView={this.changeView} sliderPos={this.state.sliderPos} />
-        )
+        return (<SelectDate type={this.state.type} cycleDates={this.cycleDates} schedule_date={this.state.schedule_date} timeslot={this.state.timeslot} chooseDate={this.chooseDate} changeView={this.changeView} sliderPos={this.state.sliderPos} />)
       case 'SelectTime':
         return(<SelectTime setTimeZone={this.setTimeZone} timeslot={this.state.timeslot} timezone={this.state.timezone} chooseTime={this.chooseTime} changeView={this.changeView} />);
       case 'ContactInfo':
@@ -234,15 +236,15 @@ class App extends Component {
       case 'ThankYou':
         return(<ThankYou prevView={this.state.prevView} userInfo={this.state} changeView={this.changeView} cancelAppt={this.cancelAppt}/>)
       case 'Home':
-        return (
-              <Home key={'Home'} type={this.state.type} clientName={this.state.clientName} fullname={this.state.fullname} status={this.state.status} onSelectionClick={this.onSelectionClick} changeView={this.changeView} />
-          )
+        return (<Home key={'Home'} type={this.state.type} clientName={this.state.clientName} fullname={this.state.fullname} status={this.state.status} onSelectionClick={this.onSelectionClick} changeView={this.changeView} />)
+      case 'ErrorView':
+        return(<ErrorView />)
       default:
         return(<Loader />)
     }
   }
   cancelAppt(){
-    var state = {token:this.state.token, phone:this.state.phone, schedule_date:formatDate(new Date()),timeslot:null,timezone:2,type:1,status:3,comment:'',view:'Home',modal:'block'}
+    var state = {token:this.state.token, phone:this.state.phone,timeslot:null,timezone:2,type:1,status:3,comment:'',view:'Home',modal:'block'}
     this.setState(state);
     fetch('/api/updateUser', {
         headers: {

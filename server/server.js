@@ -4,11 +4,11 @@ var app = express();
 var bodyParser = require('body-parser');
 var pool = mysql.createPool({
   connectionLimit:100,
-  host: '54.146.130.149',
-  user: 'will',
+  host: '23.253.236.158',
+  user: 'shawn',
   port     :  3306,
-  password: 'will-123',
-  database: 'imovercrm'
+  password: 'shawn123',
+  database: 'calendly'
 });
 app.set('port', 3001);
 

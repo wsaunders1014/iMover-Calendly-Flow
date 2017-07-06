@@ -492,6 +492,14 @@ h2 span {
   text-decoration: none;
   cursor: pointer;
 }
+#errorView {
+  margin-top: 100px;
+  font-size: 16px;
+}
+#errorView a {
+  text-decoration: none;
+  font-weight: bold;
+}
 #modal {
   position: fixed;
   width: 100%;

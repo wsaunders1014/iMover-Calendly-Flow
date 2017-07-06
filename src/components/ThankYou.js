@@ -70,11 +70,13 @@ class ThankYou extends Component {
 	formatTimeZone(){
 		switch(this.props.userInfo.timezone) {
 		  case 0:
-		    return 'EST';
-		  case 1:
-		    return 'CST';
-		  case 2:
 		    return 'PST';
+		  case 1:
+		    return 'MST';
+		  case 2:
+		    return 'CST';
+		  case 3:
+		  	return 'EST';
 		  default:
 		    break;
 		}

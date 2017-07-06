@@ -12,26 +12,33 @@ class SelectTime extends Component {
 	}
 	render() {
 		var amTimes = [];
-		for(var i =8;i <12;i++){
-			var a = i+'AM';
-			var b = i+':30AM';
-			var one = a+' - '+i+':30AM';
-			var two = b+' - '+(i+1)+'AM';
+		console.log(this.props.timezone)
+		for(var i = 7+this.props.timezone;i < 12+this.props.timezone; i++){
+			let amPM = (i >= 12) ? 'PM':'AM';
+			let x = i;
+			if(i >= 12)
+				x = i-12;
+			if(x===0)
+				x=12;
+			var a = x+amPM;
+			var b = x+':30'+amPM;
+			var one = a+' - '+x+':30'+amPM;
+			let nextHour = (i+1 >= 12) ? 'PM':'AM'; 
+
+			var two = b+' - '+(x+1)+nextHour;
 			amTimes.push(
-				<div key={i} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===b) ? ' selected':'')}>{two}</div></div>
+				<div key={x} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===b) ? ' selected':'')}>{two}</div></div>
 			)
 		}
 		var pmTimes = [];
-		for(var z =12;z < 16;z++){
-			var x;
+		for(var z =12+this.props.timezone;z < 17+this.props.timezone;z++){
+			let x = z;
 			if(z > 12)
 				x = z-12;
-			else
-				x=z;
 			a = x+'PM';
 			b = x+':30PM';
 			one = a+' - '+x+':30PM';
-			two = b+' - '+(x+1)+'PM';
+			two = b+' - '+((z-12)+1)+'PM';
 			pmTimes.push(
 				<div key={x} className="row"><div data-time={a} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===a) ? ' selected':'')}>{one}</div><div data-time={b} onClick={this.props.chooseTime} className={'time-slot'+((this.props.timeslot===b) ? ' selected':'')}>{two}</div></div>
 			)
